@@ -1,111 +1,14 @@
-# notification_listener_service
-
-A flutter plugin for interacting with Notification Service in Android.
-
-NotificationListenerService is a service that receives calls from the system when new notifications are posted or removed,
-
-for more info check [NotificationListenerService](https://developer.android.com/reference/android/service/notification/NotificationListenerService)
-
-### Installation and usage
-
-Add package to your pubspec:
-
-```yaml
+源工程地址：https://pub.dev/packages/notification_listener_service
+使用方法一样，引用修改为：
 dependencies:
-  notification_listener_service: any # or the latest version on Pub
-```
-
-Inside AndroidManifest add this to bind notification service with your application
-
-```
-
-<service android:label="notifications" android:name="notification.listener.service.NotificationListener"
-android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" android:exported="true">
-        <intent-filter>
-            <action android:name="android.service.notification.NotificationListenerService" />
-        </intent-filter>
-    </service>
-
-
-```
-
-### USAGE
-
-```dart
- /// check if notification permession is enebaled
- final bool status = await NotificationListenerService.isPermissionGranted();
-
- /// request notification permission
- /// it will open the notifications settings page and return `true` once the permission granted.
- final bool status = await NotificationListenerService.requestPermission();
-
- /// stream the incoming notification events
-  NotificationListenerService.notificationsStream.listen((event) {
-    log("Current notification: $event");
-  });
-```
-
-The `ServiceNotificationEvent` provides:
-
-```dart
-  /// the notification id
-  int? id;
-
-  /// check if we can reply the Notification
-  bool? canReply;
-
-  /// if the notification has an extras image
-  bool? haveExtraPicture;
-
-  /// if the notification has been removed
-  bool? hasRemoved;
-
-  /// notification extras image
-  /// To display an image simply use the [Image.memory] widget.
-  Uint8List? extrasPicture;
-
-  /// notification large icon
-  /// To display an image simply use the [Image.memory] widget.
-  Uint8List? largeIcon;
-
-  /// notification package name
-  String? packageName;
-
-  /// notification title
-  String? title;
-
-  /// the notification app icon
-  /// To display an image simply use the [Image.memory] widget.
-  Uint8List? appIcon;
-
-  /// the content of the notification
-  String? content;
-
-  /// send a direct message reply to the incoming notification
-  Future<bool> sendReply(String message)
-
-```
-
-To reply to a notification provides:
-
-```dart
-  try {
-    await event.sendReply("This is an auto response");
-  } catch (e) {
-    log(e.toString());
-  }
-
-```
-## Example of the app on foreground
-
-Find the exemple app [Here](https://github.com/X-SLAYER/foreground_plugins_test)
-
-## Screenshots
-
-<img src="https://user-images.githubusercontent.com/22800380/165560254-fc72ed1f-a31e-4498-b6de-18cea539ca11.png" width="300">
-
-
-
-
-
-
+  notification_listener_service:
+    git:
+      url: https://github.com/zss5599/notification_listen_server.git
+      ref: main
+修改了源工程问题：
+1.授予权限页面返回闪退
+2.app图标不显示问题
+3.同一个通知收到重复广播消息问题
+4.增加应用名称信息
+5.增加通知推送时间信息
+6.增加获取当前系统通知方法（源工程只有方法，没有是原生实现）
