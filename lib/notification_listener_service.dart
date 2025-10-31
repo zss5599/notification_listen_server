@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
-import 'package:notification_listener_service/notification_event.dart';
+import 'package:notification_listener_service_fixed/notification_event.dart';
 
 const MethodChannel methodeChannel =
     MethodChannel('x-slayer/notifications_channel');

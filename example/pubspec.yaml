@@ -18,7 +18,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  notification_listener_service:
+  notification_listener_service_fixed:
     # When depending on this package from a real application you should use:
     #   notification_listener_service: ^x.y.z
     # See https://dart.dev/tools/pub/dependencies#version-constraints

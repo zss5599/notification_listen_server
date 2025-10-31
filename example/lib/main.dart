@@ -4,8 +4,8 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:notification_listener_service/notification_event.dart';
-import 'package:notification_listener_service/notification_listener_service.dart';
+import 'package:notification_listener_service_fixed/notification_event.dart';
+import 'package:notification_listener_service_fixed/notification_listener_service.dart';
 
 import 'AnsiLogViewer.dart';
 import 'LogUtil.dart';
