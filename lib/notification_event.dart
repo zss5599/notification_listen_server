@@ -57,6 +57,12 @@ class ServiceNotificationEvent {
   /// the content of the notification
   String? content;
 
+  /// the group key for grouped notifications
+  String? groupKey;
+
+  /// whether this notification is a group summary
+  bool? isGroupSummary;
+
   ServiceNotificationEvent({
     this.id,
     this.canReply,
@@ -70,6 +76,8 @@ class ServiceNotificationEvent {
     this.appIcon,
     this.largeIcon,
     this.content,
+    this.groupKey,
+    this.isGroupSummary,
   });
 
   ServiceNotificationEvent.fromMap(Map<dynamic, dynamic> map) {
@@ -85,6 +93,8 @@ class ServiceNotificationEvent {
     appIcon = map['appIcon'];
     largeIcon = map['largeIcon'];
     content = map['content'];
+    groupKey = map['groupKey'];
+    isGroupSummary = map['isGroupSummary'];
   }
 
   /// send a direct message reply to the incoming notification
@@ -113,6 +123,8 @@ class ServiceNotificationEvent {
       content: $content
       hasRemoved: $hasRemoved
       haveExtraPicture: $haveExtraPicture
+      groupKey: $groupKey
+      isGroupSummary: $isGroupSummary
       ''';
   }
 }

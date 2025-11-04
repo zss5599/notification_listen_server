@@ -15,4 +15,6 @@ public final class NotificationConstants {
     public static String NOTIFICATIONS_LARGE_ICON = "notifications_large_icon";
     public static String IS_REMOVED = "is_removed";
     public static String CAN_REPLY = "can_reply_to_it";
+    public static String GROUP_KEY = "group_key";
+    public static String IS_GROUP_SUMMARY = "is_group_summary";
 }

@@ -1,6 +1,6 @@
 name: notification_listener_service_fixed
 description: Flutter Plugin to listen to all incoming notifications (posted or removed) with the possibility to reply to them
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/zss5599/notification_listen_server
 
 environment:

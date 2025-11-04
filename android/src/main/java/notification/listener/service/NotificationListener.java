@@ -80,12 +80,18 @@ public class NotificationListener extends NotificationListenerService {
         intent.putExtra(NotificationConstants.ID, notification.getId());
         intent.putExtra(NotificationConstants.CAN_REPLY, action != null);
 
+        // 添加分组通知相关字段
+        String groupKey = notification.getNotification().getGroup();
+        boolean isGroupSummary = (notification.getNotification().flags & Notification.FLAG_GROUP_SUMMARY) != 0;
+        
+        intent.putExtra(NotificationConstants.NOTIFICATIONS_ICON, appIcon);
+        intent.putExtra(NotificationConstants.NOTIFICATIONS_LARGE_ICON, largeIcon);
+        intent.putExtra(NotificationConstants.GROUP_KEY, groupKey);
+        intent.putExtra(NotificationConstants.IS_GROUP_SUMMARY, isGroupSummary);
+
         if (NotificationUtils.getQuickReplyAction(notification.getNotification(), packageName) != null) {
             cachedNotifications.put(notification.getId(), action);
         }
-
-        intent.putExtra(NotificationConstants.NOTIFICATIONS_ICON, appIcon);
-        intent.putExtra(NotificationConstants.NOTIFICATIONS_LARGE_ICON, largeIcon);
 
         if (extras != null) {
             CharSequence title = extras.getCharSequence(Notification.EXTRA_TITLE);
@@ -188,24 +194,18 @@ public class NotificationListener extends NotificationListenerService {
                 largeIcon = getNotificationLargeIcon(getApplicationContext(), notification.getNotification());
             }
 
-//            data.put("id", id);
-//            data.put("packageName", packageName);
-//            data.put("appName", appName);
-//            data.put("postTime", postTime);
-//            data.put("title", title);
-//            data.put("content", content);
-//            data.put("appIcon", notificationIcon);
-//            data.put("notificationExtrasPicture", notificationExtrasPicture);
-//            data.put("haveExtraPicture", haveExtraPicture);
-//            data.put("largeIcon", largeIcon);
-//            data.put("hasRemoved", hasRemoved);
-//            data.put("canReply", canReply);
-
             notifData.put("packageName", packageName);
             notifData.put("appName", getAppNameFromPackageName(packageName));
             notifData.put("postTime", postTime);
             notifData.put("id", notification.getId());
             notifData.put("canReply", action != null);
+
+            // 添加分组通知相关字段
+            String groupKey = notification.getNotification().getGroup();
+            boolean isGroupSummary = (notification.getNotification().flags & Notification.FLAG_GROUP_SUMMARY) != 0;
+            
+            notifData.put("groupKey", groupKey);
+            notifData.put("isGroupSummary", isGroupSummary);
 
             if (NotificationUtils.getQuickReplyAction(notification.getNotification(), packageName) != null) {
                 cachedNotifications.put(notification.getId(), action);

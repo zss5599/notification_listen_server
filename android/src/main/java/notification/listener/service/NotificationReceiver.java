@@ -38,6 +38,9 @@ public class NotificationReceiver extends BroadcastReceiver {
         boolean hasRemoved = intent.getBooleanExtra(IS_REMOVED, false);
         boolean canReply = intent.getBooleanExtra(CAN_REPLY, false);
         int id = intent.getIntExtra(ID, -1);
+        // 添加分组通知相关字段
+        String groupKey = intent.getStringExtra(GROUP_KEY);
+        boolean isGroupSummary = intent.getBooleanExtra(IS_GROUP_SUMMARY, false);
 
 
         HashMap<String, Object> data = new HashMap<>();
@@ -53,6 +56,9 @@ public class NotificationReceiver extends BroadcastReceiver {
         data.put("largeIcon", largeIcon);
         data.put("hasRemoved", hasRemoved);
         data.put("canReply", canReply);
+        // 将分组通知相关字段放入data中
+        data.put("groupKey", groupKey);
+        data.put("isGroupSummary", isGroupSummary);
 
         eventSink.success(data);
     }
